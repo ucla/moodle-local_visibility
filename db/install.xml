@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/visibility/db" VERSION="2017080600" COMMENT="XMLDB file for Moodle local/visibility"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+<TABLES>
+  <TABLE NAME="ucla_visibility_schedule" COMMENT="Stores time ranges for which courses should be hidden.">
+    <FIELDS>
+      <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+      <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The ID of the course this range belongs to."/>
+      <FIELD NAME="hidefrom" TYPE="int" LENGTH="15" NOTNULL="true" SEQUENCE="false" COMMENT="Hide the course starting from this date."/>
+      <FIELD NAME="hideuntil" TYPE="int" LENGTH="15" NOTNULL="true" SEQUENCE="false" COMMENT="Hide the course until this date."/>
+      <FIELD NAME="title" TYPE="text" LENGTH="50" NOTNULL="false" SEQUENCE="false" COMMENT="Optional title for this time range."/>
+      <FIELD NAME="past" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Has this range been processed yet?"/>
+    </FIELDS>
+    <KEYS>
+      <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+    </KEYS>
+    <INDEXES>
+      <INDEX NAME="courseid" UNIQUE="false" FIELDS="courseid"/>
+    </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
