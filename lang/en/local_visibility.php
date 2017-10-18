@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Visibility scheduling';
 
+$string['linkname'] = 'Course visibility';
 $string['course_visibility_task'] = 'Temporarily hidden courses';
 $string['schedulecoursevisibility'] = 'Schedule course visibility:';
 $string['schedulesubmit'] = 'Save session';

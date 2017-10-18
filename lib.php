@@ -37,7 +37,7 @@ function local_visibility_extend_navigation_course(navigation_node $navigation, 
         return;
     }
 
-    $title = get_string('visible');
+    $title = get_string('linkname', 'local_visibility');
     $path = new moodle_url("/local/visibility/schedule.php", array('id' => $course->id));
     $settingsnode = navigation_node::create($title,
                                             $path,
