@@ -33,20 +33,15 @@ function xmldb_local_visibility_install() {
     $dbman = $DB->get_manager();
 
     // Check if hidestartdate and hideenddate exist in old table.
-    $sql = "SELECT *
-              FROM {course}
-             LIMIT 1";
-    $recs = $DB->get_records_sql($sql);
-    // No need to do anything if they don't.
-    foreach ($recs as $rec) {
-        if (!property_exists($rec, 'hidestartdate') || !property_exists($rec, 'hideenddate')) {
-            return true;
-        }
+    if (!$dbman->field_exists('course', 'hidestartdate') &&
+            !$dbman->field_exists('course', 'hideenddate')) {
+        return true;
     }
 
     // Retrieve old ranges.
     $sql = "SELECT id, hidestartdate, hideenddate
-              FROM {course}";
+              FROM {course}
+             WHERE 1=1";
     $oldranges = $DB->get_records_sql($sql);
 
     // Remove fields from old table.
