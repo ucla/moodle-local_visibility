@@ -35,8 +35,11 @@ function xmldb_local_visibility_upgrade($oldversion) {
 
     $dbman = $DB->get_manager();
 
-    // Dates in this section are formatted as: YYYYMMDD00.
+    if ($oldversion < 2017090706) {
+        upgrade_plugin_savepoint(true, 2017090706, 'visibility', 'ucla');
+    }
 
     return true;
 
+    // Dates in this section are formatted as: YYYYMMDD00.
 }

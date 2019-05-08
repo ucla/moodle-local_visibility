@@ -39,7 +39,7 @@ $PAGE->set_url('/local/visibility/schedule.php', array('id' => $courseid));
 $PAGE->set_context($coursecontext);
 $PAGE->set_course($course);
 $PAGE->set_pagelayout('admin');
-$PAGE->set_title(get_string('coursevisibilityheader', 'local_visibility'));
+$PAGE->set_title("$course->shortname: ".get_string('coursevisibilityheader', 'local_visibility'));
 $PAGE->set_heading($course->fullname);
 $baseurl = new moodle_url('schedule.php', array('id' => $courseid));
 
@@ -57,6 +57,11 @@ if (optional_param('cancel', false, PARAM_BOOL)) {
 if ($data = $mform->get_data()) {
     if (optional_param('savevisiblebutton', 0, PARAM_RAW) && isset($data->visible)) {
         $DB->update_record('course', array('id' => $courseid, 'visible' => $data->visible));
+        if ($data->visible) {
+            \core\notification::success(get_string('successcourseunhidden', 'local_visibility'));
+        } else {
+            \core\notification::success(get_string('successcoursehidden', 'local_visibility'));
+        }
     } else if (optional_param('submitbutton', 0, PARAM_RAW) && isset($data->hideuntil) && isset($data->hidefrom)) {
         $data->courseid = $courseid;
 
@@ -67,11 +72,14 @@ if ($data = $mform->get_data()) {
 
         $data->past = ($data->hideuntil < time());
         $DB->insert_record('ucla_visibility_schedule', $data);
+
+        \core\notification::success(get_string('successaddedschedule', 'local_visibility'));
     } else if (optional_param('mergebutton', 0, PARAM_RAW) && isset($data->hideuntil) && isset($data->hidefrom)) {
         // Hide the course immediately if appropriate.
         if ($data->hidefrom <= time() && $data->hideuntil > time()) {
             course_change_visibility($courseid, false);
         }
+        \core\notification::success(get_string('successmergeschedule', 'local_visibility'));
     }
     redirect($baseurl);
 }

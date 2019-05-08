@@ -76,8 +76,8 @@ class schedule_form extends moodleform {
         $table->data = array();
         foreach ($this->visibilityschedule as $index => $range) {
             // This is used to delete the range.
-            $table->rowclasses[$index] = 'range' . $range->id;
-            $deletebutton = '<img src="' . $OUTPUT->pix_url('t/delete', '') .
+            $table->rowclasses[$index] = 'visibility-session range' . $range->id;
+            $deletebutton = '<img src="' . $OUTPUT->image_url('t/delete', '') .
                     '" style="cursor:pointer;" class="rangedeletebutton"'.
                     'data-course="'. $this->course->id .'" data-id="'. $range->id .'";/>';
 
@@ -105,7 +105,7 @@ class schedule_form extends moodleform {
         $choices = array();
         $choices['0'] = get_string('hideoption', 'local_visibility');
         $choices['1'] = get_string('showoption', 'local_visibility');
-        $mform->addElement('select', 'visible', get_string('visible'), $choices);
+        $mform->addElement('select', 'visible', get_string('visibilitytitle', 'local_visibility'), $choices);
         $mform->addHelpButton('visible', 'visible');
         $mform->setDefault('visible', $this->course->visible);
 
@@ -136,10 +136,15 @@ class schedule_form extends moodleform {
         $mform->addElement('html', '<br>');
 
         // Draw the table.
-        $mform->addElement('static', 'hiddenfromtabletitle', get_string('scheduletableheader', 'local_visibility'), null);
-        $mform->addElement('html', html_writer::table($table) . '<br>');
-        $mform->registerNoSubmitButton($deletebuttonname);
+        if (!empty($this->visibilityschedule)) {
+            $mform->addElement('static', 'hiddenfromtabletitle', get_string('scheduletableheader', 'local_visibility'), null);
+            $mform->addElement('html', html_writer::table($table) . '<br>');
+            $mform->registerNoSubmitButton($deletebuttonname);
 
+            // Define a delete all button, which deletes the sessions using ajax.
+            $mform->addElement('button', 'rangedeleteallbutton', get_string("deleteall"),
+                    array('data-course' => $this->course->id));
+        }
     }
 
     /**
@@ -168,7 +173,7 @@ class schedule_form extends moodleform {
         if (empty($data['hidefrom'])) {
             $errors['hidefrom'] = get_string('hideemptyerror', 'local_visibility');
         }
-        if (empty($data['hidefrom'])) {
+        if (empty($data['hideuntil'])) {
             $errors['hideuntil'] = get_string('hideemptyerror', 'local_visibility');
         }
         if (empty($data['hidefrom']) || empty($data['hidefrom'])) {

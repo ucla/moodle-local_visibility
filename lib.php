@@ -37,13 +37,13 @@ function local_visibility_extend_navigation_course(navigation_node $navigation, 
         return;
     }
 
-    $title = get_string('linkname', 'local_visibility');
+    $title = get_string('pluginname', 'local_visibility');
     $path = new moodle_url("/local/visibility/schedule.php", array('id' => $course->id));
     $settingsnode = navigation_node::create($title,
                                             $path,
                                             navigation_node::TYPE_SETTING,
                                             null,
-                                            null,
+                                            'coursevisibility',
                                             new pix_icon($course->visible ? 'i/hide' : 'i/show', ''));
     if (isset($settingsnode)) {
         $navigation->add_node($settingsnode, 'users');
