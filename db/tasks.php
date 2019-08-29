@@ -1,5 +1,5 @@
 <?php
-// This file is part of the UCLA local_visibility plugin for Moodle - http://moodle.org/
+// This file is part of the local_visibility plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * UCLA local visibility cron task.
+ * local_visibility cron task.
  *
  * @package    local_visibility
  * @copyright  2017 UC Regents

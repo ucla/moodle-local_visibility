@@ -36,7 +36,7 @@ function xmldb_local_visibility_upgrade($oldversion) {
     $dbman = $DB->get_manager();
 
     if ($oldversion < 2017090706) {
-        upgrade_plugin_savepoint(true, 2017090706, 'visibility', 'ucla');
+        upgrade_plugin_savepoint(true, 2017090706, 'visibility', 'local');
     }
 
     return true;

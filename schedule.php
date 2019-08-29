@@ -71,7 +71,7 @@ if ($data = $mform->get_data()) {
         }
 
         $data->past = ($data->hideuntil < time());
-        $DB->insert_record('ucla_visibility_schedule', $data);
+        $DB->insert_record('course_visibility_schedule', $data);
 
         \core\notification::success(get_string('successaddedschedule', 'local_visibility'));
     } else if (optional_param('mergebutton', 0, PARAM_RAW) && isset($data->hideuntil) && isset($data->hidefrom)) {

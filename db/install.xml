@@ -4,7 +4,7 @@
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
 <TABLES>
-  <TABLE NAME="ucla_visibility_schedule" COMMENT="Stores time ranges for which courses should be hidden.">
+  <TABLE NAME="course_visibility_schedule" COMMENT="Stores time ranges for which courses should be hidden.">
     <FIELDS>
       <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
       <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The ID of the course this range belongs to."/>

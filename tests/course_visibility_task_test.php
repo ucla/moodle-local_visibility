@@ -1,5 +1,5 @@
 <?php
-// This file is part of the UCLA visibility plugin for Moodle - http://moodle.org/
+// This file is part of the local_visibility plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ class course_visibility_task_test extends advanced_testcase {
      */
     private function add_schedule($courseid, $hidefrom, $hideuntil, $past = 2) {
         global $DB;
-        return $DB->insert_record('ucla_visibility_schedule', array('courseid' => $courseid,
+        return $DB->insert_record('course_visibility_schedule', array('courseid' => $courseid,
                 'hidefrom' => $hidefrom, 'hideuntil' => $hideuntil, 'title' => '',
                 'past' => ($past == 2)? ($hideuntil < $this->now) : $past));
     }
@@ -62,7 +62,7 @@ class course_visibility_task_test extends advanced_testcase {
      */
     private function del_schedule($id) {
         global $DB;
-        $DB->delete_records('ucla_visibility_schedule', array('id' => $id));
+        $DB->delete_records('course_visibility_schedule', array('id' => $id));
     }
 
     /**

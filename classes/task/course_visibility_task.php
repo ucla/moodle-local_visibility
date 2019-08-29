@@ -1,5 +1,5 @@
 <?php
-// This file is part of the UCLA local_visibility plugin for Moodle - http://moodle.org/
+// This file is part of the local_visibility plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ defined('MOODLE_INTERNAL') || die();
  */
 class course_visibility_task extends \core\task\scheduled_task {
     /**
-     * Iterates through each course in {ucla_visibility_schedule} and determines their visibility.
+     * Iterates through each course in {course_visibility_schedule} and determines their visibility.
      *
      * @return void
      */
@@ -57,16 +57,16 @@ class course_visibility_task extends \core\task\scheduled_task {
         $ranges = array();
         if (is_null($id) || is_null($visible)) {
             // ...for each course.
-            $sql = "SELECT uvs.id, uvs.courseid, uvs.hidefrom, uvs.hideuntil, uvs.past, c.visible
-                      FROM {ucla_visibility_schedule} uvs
+            $sql = "SELECT cvs.id, cvs.courseid, cvs.hidefrom, cvs.hideuntil, cvs.past, c.visible
+                      FROM {course_visibility_schedule} cvs
                       JOIN {course} c
-                        ON uvs.courseid = c.id
-                     WHERE uvs.past = 0";
+                        ON cvs.courseid = c.id
+                     WHERE cvs.past = 0";
             $ranges = $DB->get_recordset_sql($sql);
         } else {
             // ...for the single course.
             $sql = "SELECT id, courseid, hidefrom, hideuntil, title, past
-                      FROM {ucla_visibility_schedule}
+                      FROM {course_visibility_schedule}
                      WHERE courseid = :courseid
                            AND past = 0";
             $ranges = $DB->get_records_sql($sql, array('courseid' => $id));
@@ -86,7 +86,7 @@ class course_visibility_task extends \core\task\scheduled_task {
         foreach ($ranges as $range) {
             // Check if this range is now in the past. If so, it can be ignored in the future.
             if ($range->hideuntil <= time()) {
-                $DB->update_record('ucla_visibility_schedule', array('id' => $range->id, 'past' => 1));
+                $DB->update_record('course_visibility_schedule', array('id' => $range->id, 'past' => 1));
             }
 
             if ($range->hidefrom <= $time && $range->hideuntil > $time) {

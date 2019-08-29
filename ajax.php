@@ -55,20 +55,20 @@ $outcome->error = '';
 
 switch ($action) {
     case 'delete':
-        $deleted = $DB->delete_records('ucla_visibility_schedule',
+        $deleted = $DB->delete_records('course_visibility_schedule',
                 array('id' => $rangeid, 'courseid' => $courseid));
         if (empty($deleted)) {
             $outcome->success = false;
             $outcome->error = 'failed';
         } else {
             // See how many records are left.
-            $outcome->count = $DB->count_records('ucla_visibility_schedule',
+            $outcome->count = $DB->count_records('course_visibility_schedule',
                     array('courseid' => $courseid));
             $outcome->successmsg = get_string('successdeleteschedule', 'local_visibility');
         }
         break;
     case 'deleteall':
-        $deleted = $DB->delete_records('ucla_visibility_schedule',
+        $deleted = $DB->delete_records('course_visibility_schedule',
                 array('courseid' => $courseid));
         if (empty($deleted)) {
             $outcome->success = false;

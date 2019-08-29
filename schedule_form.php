@@ -52,7 +52,7 @@ class schedule_form extends moodleform {
 
         // Retrieve the schedule for this course.
         $this->course = $DB->get_record('course', array('id' => $this->_customdata['courseid']));
-        $this->visibilityschedule = $DB->get_records('ucla_visibility_schedule',
+        $this->visibilityschedule = $DB->get_records('course_visibility_schedule',
                 array('courseid' => $this->_customdata['courseid']));
 
         // Sort the schedule by increasing order of start time, so that the earlier schedules are displayed first.
@@ -163,7 +163,7 @@ class schedule_form extends moodleform {
         $errors = array();
 
         // Refresh and resort the schedule for this course, since some ranges may have been deleted.
-        $this->visibilityschedule = $DB->get_records('ucla_visibility_schedule',
+        $this->visibilityschedule = $DB->get_records('course_visibility_schedule',
                 array('courseid' => $this->_customdata['courseid']));
         usort($this->visibilityschedule, function($a, $b) {
             return ($a->hidefrom > $b->hidefrom);
@@ -227,7 +227,7 @@ class schedule_form extends moodleform {
      * Utility function which checks whether hidefrom and hideuntil overlap with any of
      * the ranges in $this->visibilityschedule.
      * When $merge is true, it will also merge the new range into the existing schedule,
-     * and update the ucla_visibility_schedule table in the database.
+     * and update the course_visibility_schedule table in the database.
      *
      * @param object $data
      * @param boolean $merge Optional. If true, merge the new hidefrom and hideuntil into the old schedule.
@@ -266,11 +266,11 @@ class schedule_form extends moodleform {
                     // The interval has no record in the database.
                     $intervals[$i - 1]['id'] = $intervals[$i]['id'];
                 } else if ($merge) {
-                    $DB->delete_records('ucla_visibility_schedule', array('id' => $intervals[$i]['id']));
+                    $DB->delete_records('course_visibility_schedule', array('id' => $intervals[$i]['id']));
                 }
                 // Update the range in the database.
                 $intervals[$i - 1]['past'] = ($intervals[$i - 1]['hideuntil'] < time());
-                $DB->update_record('ucla_visibility_schedule', $intervals[$i - 1]);
+                $DB->update_record('course_visibility_schedule', $intervals[$i - 1]);
 
                 array_splice($intervals, $i, $i);
                 $i--;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of the UCLA local_visibility plugin for Moodle - http://moodle.org/
+// This file is part of the local_visibility plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ class core {
      */
     static function set_visiblity_notice($course) {
         global $CFG, $DB;
-        $schedule = $DB->get_records('ucla_visibility_schedule', array('courseid' => $course->id, 'past' => 0));
+        $schedule = $DB->get_records('course_visibility_schedule', array('courseid' => $course->id, 'past' => 0));
         $noticeset = false;
         foreach ($schedule as $range) {
             $title = '';
