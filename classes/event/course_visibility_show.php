@@ -18,7 +18,7 @@
  * Course visibility (show) logging event handler.
  *
  * @package    local_visibility
- * @copyright  2017 UC Regents
+ * @copyright  2019 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace local_visibility\event;
@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
  * Records when the course becomes visible to students via the course visibility scheduler.
  *
  * @package    local_visibility
- * @copyright  2017 UC Regents
+ * @copyright  2019 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_visibility_show extends \core\event\base {

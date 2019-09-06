@@ -17,9 +17,9 @@
 /**
  * Tool used to schedule a course's visibility.
  *
- * @copyright 2017 UC Regents
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @package local_visibility
+ * @package    local_visibility
+ * @copyright  2019 UC Regents
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once('../../config.php');

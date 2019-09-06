@@ -17,9 +17,9 @@
 /**
  * Visibility schedule form definition.
  *
- * @copyright 2017 UC Regents
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @package local_visibility
+ * @package    local_visibility
+ * @copyright  2019 UC Regents
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
@@ -28,9 +28,9 @@ require_once("$CFG->libdir/formslib.php");
 /**
  * Form used to schedule a course's visibility.
  *
- * @copyright 2017 UC Regents
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @package local_visibility
+ * @package    local_visibility
+ * @copyright  2019 UC Regents
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class schedule_form extends moodleform {
     /**

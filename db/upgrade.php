@@ -19,7 +19,7 @@
  *
  * @package    local_visibility
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @copyright  2017 UC Regents
+ * @copyright  2019 UC Regents
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -35,8 +35,8 @@ function xmldb_local_visibility_upgrade($oldversion) {
 
     $dbman = $DB->get_manager();
 
-    if ($oldversion < 2017090706) {
-        upgrade_plugin_savepoint(true, 2017090706, 'visibility', 'local');
+    if ($oldversion < 2019090600) {
+        upgrade_plugin_savepoint(true, 2019090600, 'visibility', 'local');
     }
 
     return true;

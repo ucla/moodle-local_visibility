@@ -20,7 +20,7 @@
  * @package    local_visibility
  * @subpackage lang
  * @subpackage en
- * @copyright  2017 UC Regents
+ * @copyright  2019 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -67,6 +67,6 @@ $string['eventcoursevisibilityhide'] = 'Course visibility - hidden';
 $string['eventcoursevisibilityshow'] = 'Course visibility - visible';
 $string['eventcoursevisibilityhide_desc'] = 'This course visibility has been changed. Course is now hidden.';
 $string['eventcoursevisibilityshow_desc'] = 'This course visibility has been changed. Course is now visible.';
-// Confirmation Modal
+// Confirmation modal.
 $string['confirmremovevisibilitysession'] = 'Are you absolutely sure you want to delete this hidden visibility session?';
 $string['confirmdeleteallsessions'] = 'Are you sure you would like to delete ALL hidden visibility sessions?';

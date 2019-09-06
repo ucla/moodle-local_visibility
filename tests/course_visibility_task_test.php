@@ -18,7 +18,7 @@
  * Tests the course_visibility_task class.
  *
  * @package    local_visibility
- * @copyright  2017 UC Regents
+ * @copyright  2019 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
@@ -26,7 +26,8 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * PHPunit testcase class.
  *
- * @copyright  2017 UC Regents
+ * @package    local_visibility
+ * @copyright  2019 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_visibility_task_test extends advanced_testcase {
@@ -54,7 +55,7 @@ class course_visibility_task_test extends advanced_testcase {
         global $DB;
         return $DB->insert_record('course_visibility_schedule', array('courseid' => $courseid,
                 'hidefrom' => $hidefrom, 'hideuntil' => $hideuntil, 'title' => '',
-                'past' => ($past == 2)? ($hideuntil < $this->now) : $past));
+                'past' => ($past == 2) ? ($hideuntil < $this->now) : $past));
     }
     /**
      * Delete schedule from table.
@@ -123,42 +124,42 @@ class course_visibility_task_test extends advanced_testcase {
 
         // 8. Two schedules. First hide from not passed. Course visible initially.
         $course = $this->getDataGenerator()->create_course();
-        self::add_schedule($course->id, $now +  5 * MINSECS, $now + 10 * MINSECS);
+        self::add_schedule($course->id, $now + 5 * MINSECS, $now + 10 * MINSECS);
         self::add_schedule($course->id, $now + 15 * MINSECS, $now + 20 * MINSECS);
         $expectations[$course->id] = 1;
         $courseids[] = $course->id;
 
         // 9. Two schedules. First hide from passed. Course visible initially.
         $course = $this->getDataGenerator()->create_course();
-        self::add_schedule($course->id, $now -  5 * MINSECS, $now + 5 * MINSECS);
+        self::add_schedule($course->id, $now - 5 * MINSECS, $now + 5 * MINSECS);
         self::add_schedule($course->id, $now + 10 * MINSECS, $now + 15 * MINSECS);
         $expectations[$course->id] = 0;
         $courseids[] = $course->id;
 
         // 10. Two schedules. First hide until passed. Course visible initially.
         $course = $this->getDataGenerator()->create_course();
-        self::add_schedule($course->id, $now - 10 * MINSECS, $now -  5 * MINSECS);
-        self::add_schedule($course->id, $now +  5 * MINSECS, $now + 10 * MINSECS);
+        self::add_schedule($course->id, $now - 10 * MINSECS, $now - 5 * MINSECS);
+        self::add_schedule($course->id, $now + 5 * MINSECS, $now + 10 * MINSECS);
         $expectations[$course->id] = 1;
         $courseids[] = $course->id;
-        
+
         // 11. Two schedules. Second hide from passed. Course visible initially.
         $course = $this->getDataGenerator()->create_course();
         self::add_schedule($course->id, $now - 15 * MINSECS, $now - 10 * MINSECS);
-        self::add_schedule($course->id, $now -  5 * MINSECS, $now +  5 * MINSECS);
+        self::add_schedule($course->id, $now - 5 * MINSECS, $now + 5 * MINSECS);
         $expectations[$course->id] = 0;
         $courseids[] = $course->id;
 
         // 12. Two schedules. Second hide until passed. Course visible initially.
         $course = $this->getDataGenerator()->create_course();
         self::add_schedule($course->id, $now - 20 * MINSECS, $now - 15 * MINSECS);
-        self::add_schedule($course->id, $now - 10 * MINSECS, $now -  5 * MINSECS, 0);
+        self::add_schedule($course->id, $now - 10 * MINSECS, $now - 5 * MINSECS, 0);
         $expectations[$course->id] = 1;
         $courseids[] = $course->id;
 
         // 13. Two schedules. First hide from not passed. Course NOT visible initially.
         $course = $this->getDataGenerator()->create_course();
-        self::add_schedule($course->id, $now +  5 * MINSECS, $now + 10 * MINSECS);
+        self::add_schedule($course->id, $now + 5 * MINSECS, $now + 10 * MINSECS);
         self::add_schedule($course->id, $now + 15 * MINSECS, $now + 20 * MINSECS);
         course_change_visibility($course->id, 0);
         $expectations[$course->id] = 1;
@@ -166,7 +167,7 @@ class course_visibility_task_test extends advanced_testcase {
 
         // 14. Two schedules. First hide from passed. Course NOT visible initially.
         $course = $this->getDataGenerator()->create_course();
-        self::add_schedule($course->id, $now -  5 * MINSECS, $now + 5 * MINSECS);
+        self::add_schedule($course->id, $now - 5 * MINSECS, $now + 5 * MINSECS);
         self::add_schedule($course->id, $now + 10 * MINSECS, $now + 15 * MINSECS);
         course_change_visibility($course->id, 0);
         $expectations[$course->id] = 0;
@@ -174,16 +175,16 @@ class course_visibility_task_test extends advanced_testcase {
 
         // 15. Two schedules. First hide until passed. Course NOT visible initially.
         $course = $this->getDataGenerator()->create_course();
-        self::add_schedule($course->id, $now - 10 * MINSECS, $now -  5 * MINSECS);
-        self::add_schedule($course->id, $now +  5 * MINSECS, $now + 10 * MINSECS);
+        self::add_schedule($course->id, $now - 10 * MINSECS, $now - 5 * MINSECS);
+        self::add_schedule($course->id, $now + 5 * MINSECS, $now + 10 * MINSECS);
         course_change_visibility($course->id, 0);
         $expectations[$course->id] = 1;
         $courseids[] = $course->id;
-        
+
         // 16. Two schedules. Second hide from passed. Course NOT visible initially.
         $course = $this->getDataGenerator()->create_course();
         self::add_schedule($course->id, $now - 15 * MINSECS, $now - 10 * MINSECS);
-        self::add_schedule($course->id, $now -  5 * MINSECS, $now +  5 * MINSECS);
+        self::add_schedule($course->id, $now - 5 * MINSECS, $now + 5 * MINSECS);
         course_change_visibility($course->id, 0);
         $expectations[$course->id] = 0;
         $courseids[] = $course->id;
@@ -191,7 +192,7 @@ class course_visibility_task_test extends advanced_testcase {
         // 17. Two schedules. Second hide until passed. Course NOT visible initially.
         $course = $this->getDataGenerator()->create_course();
         self::add_schedule($course->id, $now - 20 * MINSECS, $now - 15 * MINSECS);
-        self::add_schedule($course->id, $now - 10 * MINSECS, $now -  5 * MINSECS, 0);
+        self::add_schedule($course->id, $now - 10 * MINSECS, $now - 5 * MINSECS, 0);
         course_change_visibility($course->id, 0);
         $expectations[$course->id] = 1;
         $courseids[] = $course->id;

@@ -18,7 +18,7 @@
  * Collection of functions for plugin.
  *
  * @package    local_visibility
- * @copyright  2019  UC Regents
+ * @copyright  2019 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Collection of functions for plugin.
  *
+ * @package    local_visibility
  * @copyright  2019 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -39,7 +40,7 @@ class core {
      *
      * @return boolean  Returns true if notice was set, otherwise false.
      */
-    static function set_visiblity_notice($course) {
+    public static function set_visiblity_notice($course) {
         global $CFG, $DB;
         $schedule = $DB->get_records('course_visibility_schedule', array('courseid' => $course->id, 'past' => 0));
         $noticeset = false;
@@ -67,11 +68,12 @@ class core {
      *
      * @param object $course
      */
-    static function set_instructor_visiblity_notice($course) {
+    public static function set_instructor_visiblity_notice($course) {
         // Display the temporary course visibility status for users with update access.
         if (has_capability('moodle/course:update', \context_course::instance($course->id))) {
             // If the cron hasn't hidden/unhidden the course yet, just change it ourselves. Also retrieve visibility schedule.
-            $visibilityandranges = \local_visibility\task\course_visibility_task::determine_visibility($course->id, $course->visible);
+            $visibilityandranges =
+                    \local_visibility\task\course_visibility_task::determine_visibility($course->id, $course->visible);
 
             if (isset($visibilityandranges)) {
                 $course->visible = $visibilityandranges['visible'];

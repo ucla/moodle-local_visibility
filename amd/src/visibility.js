@@ -1,7 +1,7 @@
 define(['jquery', 'core/notification', 'core/str'], function($, notification, str) {
     // Private variables and functions.
 
-    /** @var {Number} element The current clicked element */
+    // The current clicked element.
     var element = 0;
 
     /**
@@ -12,7 +12,7 @@ define(['jquery', 'core/notification', 'core/str'], function($, notification, st
      * @method confirmationDialog
      */
     var confirmationDialog = function(confirmationText, action) {
-        // Create confirmation string dialog
+        // Create confirmation string dialog.
         str.get_strings([
             { key: 'confirm', component: 'moodle' },
             { key: confirmationText, component: 'local_visibility' },
@@ -20,11 +20,11 @@ define(['jquery', 'core/notification', 'core/str'], function($, notification, st
             { key: 'no', component: 'core' }
         ]).done(function(strs) {
             notification.confirm(
-                strs[0], // Confirm
+                strs[0], // Confirm.
                 strs[1], // Are you absolutely sure?
-                strs[2], // Yes
-                strs[3], // No
-                action // On Confirm
+                strs[2], // Yes.
+                strs[3], // No.
+                action
             );
         }.bind(this)).fail(notification.exception);
     };
@@ -100,7 +100,7 @@ define(['jquery', 'core/notification', 'core/str'], function($, notification, st
     };
 
     return {
-        // Public variables and functions
+        // Public variables and functions.
 
         /**
          * Initialise the module.

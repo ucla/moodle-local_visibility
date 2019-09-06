@@ -18,7 +18,7 @@
  * Installation script for local_visibility.
  *
  * @package    local_visibility
- * @copyright  2017 UC Regents
+ * @copyright  2019 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 

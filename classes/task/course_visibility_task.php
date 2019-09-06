@@ -18,7 +18,7 @@
  * Checks if a course should be visible and updates course visibility accordingly.
  *
  * @package    local_visibility
- * @copyright  2017 UC Regents
+ * @copyright  2019 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,8 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Task class.
  *
- * @copyright  2017 UC Regents
+ * @package    local_visibility
+ * @copyright  2019 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_visibility_task extends \core\task\scheduled_task {

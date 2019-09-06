@@ -18,8 +18,8 @@
  * Course visibility library file.
  *
  * @package    local_visibility
+ * @copyright  2019 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @copyright  (C) 2017 UC Regents
  */
 
 defined('MOODLE_INTERNAL') || die();

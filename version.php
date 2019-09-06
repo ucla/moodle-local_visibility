@@ -19,12 +19,12 @@
  * Defines the version of local_visibility plugin.
  *
  * @package    local_visibility
- * @copyright  2017 UC Regents
+ * @copyright  2019 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2017092907;        // The current block version (Date: YYYYMMDDXX).
+$plugin->version   = 2019090600;        // The current block version (Date: YYYYMMDDXX).
 $plugin->cron      = 0;                 // Period for cron to check this module (secs).
 $plugin->component = 'local_visibility'; // To check on upgrade, that module sits in correct place.
