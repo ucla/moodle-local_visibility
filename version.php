@@ -25,6 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2019090600;        // The current block version (Date: YYYYMMDDXX).
-$plugin->cron      = 0;                 // Period for cron to check this module (secs).
-$plugin->component = 'local_visibility'; // To check on upgrade, that module sits in correct place.
+$plugin->version = 2019090600;
+$plugin->requires = 2018051708;
+$plugin->cron      = 0;
+$plugin->component = 'local_visibility';
+$plugin->maturity = MATURITY_STABLE;
+$plugin->release = '1.0';
