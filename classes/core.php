@@ -36,9 +36,7 @@ class core {
     /**
      * Checks if course is hidden due to a scheduled visibility window.
      *
-     * If so, then display notice.
-     *
-     * @return boolean  Returns true if notice was set, otherwise false.
+     * If so, then display notice and dies.
      */
     public static function set_visiblity_notice($course) {
         global $CFG, $DB;
@@ -52,14 +50,11 @@ class core {
                     $title = '<i>(' . $range->title . ')</i>';
                 }
                 $hideuntil = userdate($range->hideuntil, get_string('strftimedatetime', 'langconfig'));
-                \core\notification::info(get_string('coursehidden', 'local_visibility',
+                notice(get_string('coursehidden', 'local_visibility',
                         array('hideuntil' => $hideuntil, 'title' => $title)),
                         $CFG->wwwroot .'/');
-                $noticeset = true;
-                break;
             }
         }
-        return $noticeset;
     }
 
     /**
