@@ -43,7 +43,8 @@ define(['jquery', 'core/notification', 'core/str'], function($, notification, st
             data: {
                 action: 'delete',
                 courseid: courseId,
-                rangeid: id
+                rangeid: id,
+                sesskey: M.cfg.sesskey
             }
         }).done(function( msg ) {
             if (msg.success) {
@@ -78,7 +79,8 @@ define(['jquery', 'core/notification', 'core/str'], function($, notification, st
             url: "ajax.php",
             data: {
                 action: 'deleteall',
-                courseid: courseId
+                courseid: courseId,
+                sesskey: M.cfg.sesskey
             }
         }).done(function( msg ) {
             if (msg.success) {

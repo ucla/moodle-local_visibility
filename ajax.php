@@ -53,6 +53,8 @@ $outcome->success = true;
 $outcome->response = new stdClass();
 $outcome->error = '';
 
+require_sesskey();
+
 switch ($action) {
     case 'delete':
         $deleted = $DB->delete_records('course_visibility_schedule',
